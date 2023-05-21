@@ -1,0 +1,15 @@
+server:
+#  ip: 3.96.64.25
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://3.96.64.25:3306/fisherman?serverTimezone=GMT-8
+#    url: jdbc:mysql://localhost:3306/fisherman?serverTimezone=GMT-8
+    username: root
+    password: Tapebook123
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
