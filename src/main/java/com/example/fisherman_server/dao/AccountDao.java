@@ -10,5 +10,7 @@ public interface AccountDao {
     Integer loginCheckUsernameExisted(String username);
 //    get a particular user's info used for server judge whether the password is valid
     User loginGetUserInfo(String username);
+//    user register
+    Integer registerUser(String username, String password,String nickname, String email);
 
 }

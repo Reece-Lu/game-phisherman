@@ -13,9 +13,9 @@
         SELECT id, username, password, nickname, email FROM `sys_user` WHERE username = #{username};
     </select>
 
-
-
-
-
+<!--  user register  -->
+    <insert id="registerUser">
+        INSERT INTO sys_user (username, password, nickname, email) VALUES (#{username}, #{password}, #{nickname}, #{email});
+    </insert>
 
 </mapper>
