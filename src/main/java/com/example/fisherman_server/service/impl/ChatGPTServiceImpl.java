@@ -15,7 +15,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
 
     @Override
     public List<String> GPTSingleChatting(GPTChatting gptChatting) {
-        String token = "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";
+        String token = "";
 
         OpenAiService service = new OpenAiService(token);
         CompletionRequest completionRequest = CompletionRequest.builder()
