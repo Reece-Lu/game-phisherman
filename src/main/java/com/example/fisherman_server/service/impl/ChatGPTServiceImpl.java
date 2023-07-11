@@ -19,7 +19,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
 
     @Override
     public List<String> GPTSingleChatting(GPTChatting gptChatting) {
-        String token = "sk-";
+        String token = "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";
 
         OpenAiService service = new OpenAiService(token);
         CompletionRequest completionRequest = CompletionRequest.builder()
@@ -46,18 +46,32 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     QuestionsDao questionsDao;
 
     @Override
-    @Scheduled(cron = "0 10 17 * * MON")
+    @Scheduled(cron = "30 42 15 * * TUE")
     public void GenerateQuestions(){
 
-        for (int i = 0; i < 100; i++) {
-            GPTChatting gptChatting = new GPTChatting("Generate questions about network security，Select Answer in A, B, C, D:\\n\\n Question: [question]\\nOption A: [option_a]\\nOption B: [option_b]\\nOption C: [option_c]\\nOption D: [option_d]\\nAnswer: [answer]");
+        Question question = new Question();
+        List<String> que = new ArrayList<>();
 
-            List<String> que = GPTSingleChatting(gptChatting);
+        int t = 0;
+
+        for (int i = 0; i < 100; i++) {
+
+            if( t == 0){
+                question.setType("multiple-choice");
+                GPTChatting gptChatting = new GPTChatting("Generate a multiple-choice question about cybersecurity. In this multiple-choice question, there should be at least two correct options. The answer should be represented using the option letters like 'A,B', 'A,C', 'A,B,C', 'A,B,C,D', and so on:\\n\\n Question: [question]\\nOption A: [option_a]\\nOption B: [option_b]\\nOption C: [option_c]\\nOption D: [option_d]\\nAnswer: [answer]");
+                que = GPTSingleChatting(gptChatting);
+                t =1;
+            }else{
+                question.setType("single-choice");
+                GPTChatting gptChatting = new GPTChatting("Generate questions about network security，Select Answer in A, B, C, D:\\n\\n Question: [question]\\nOption A: [option_a]\\nOption B: [option_b]\\nOption C: [option_c]\\nOption D: [option_d]\\nAnswer: [answer]");
+                que = GPTSingleChatting(gptChatting);
+                t=0;
+            }
 
             String generatedQuestion = que.get(0);
             String[] lines = generatedQuestion.split("\n");
 
-            Question question = new Question();
+
             question.setQuestion(lines[2].substring(10));
             question.setOptionA(lines[3].substring(9));
             question.setOptionB(lines[4].substring(9));
@@ -79,8 +93,6 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 System.out.println("Insert Succeed");
             }
         }
-
-
 
     }
 

@@ -14,8 +14,8 @@
 
     <!-- Insert a question into the questions table -->
     <insert id="insertQuestion" parameterType="com.example.fisherman_server.entity.Question">
-        INSERT INTO questions (question, option_a, option_b, option_c, option_d, answer)
-        VALUES (#{question}, #{optionA}, #{optionB}, #{optionC}, #{optionD}, #{answer});
+        INSERT INTO questions (question, type, option_a, option_b, option_c, option_d, answer)
+        VALUES (#{question}, #{type}, #{optionA}, #{optionB}, #{optionC}, #{optionD}, #{answer});
     </insert>
 
     <!-- Retrieve the content of the nth question -->
