@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.fisherman_server.dao.QuestionsDao">
+
+    <resultMap id="QuestionParameterMap" type="com.example.fisherman_server.entity.Question">
+        <result property="optionA" column="option_a" />
+        <result property="optionB" column="option_b" />
+        <result property="optionC" column="option_c" />
+        <result property="optionD" column="option_d" />
+    </resultMap>
+
+
+    <!-- Insert a question into the questions table -->
+    <insert id="insertQuestion" parameterType="com.example.fisherman_server.entity.Question">
+        INSERT INTO questions (question, option_a, option_b, option_c, option_d, answer)
+        VALUES (#{question}, #{optionA}, #{optionB}, #{optionC}, #{optionD}, #{answer});
+    </insert>
+
+    <!-- Retrieve the content of the nth question -->
+    <select id="getNthQuestion" resultMap="QuestionParameterMap">
+        SELECT * FROM questions ORDER BY id DESC LIMIT #{n}, 1
+    </select>
+
+</mapper>

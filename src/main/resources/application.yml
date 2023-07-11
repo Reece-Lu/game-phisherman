@@ -2,14 +2,24 @@ server:
 #  ip: 3.96.64.25
   port: 9090
 
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.96.64.25:3306/fisherman?serverTimezone=GMT-8
-#    url: jdbc:mysql://localhost:3306/fisherman?serverTimezone=GMT-8
+    url: jdbc:mysql://3.96.64.25:3306/phisherman?serverTimezone=GMT-8
+#    url: jdbc:mysql://localhost:3306/phisherman?serverTimezone=GMT-8
     username: root
     password: Tapebook123
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+ChatGPT:
+  connect-timeout: 60000      # HTTP request connection timeout
+  read-timeout: 60000         # HTTP request readout time
+  variables:
+    apiKey: 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
+    model: text-davinci-003   # ChartGPT model
+    maxTokens: 50             # Maximum number of Tokens
+    temperature: 0.5          # The larger the value, the more random the result of each return, that is, the smaller the similarity.

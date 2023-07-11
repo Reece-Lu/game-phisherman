@@ -2,6 +2,7 @@ package com.example.fisherman_server.controller;
 
 import com.example.fisherman_server.common.Result;
 import com.example.fisherman_server.controller.DTO.UserLoginDTO;
+import com.example.fisherman_server.controller.DTO.UserRegisterDTO;
 import com.example.fisherman_server.entity.User;
 import com.example.fisherman_server.service.AccountService;
 
@@ -21,7 +22,7 @@ public class AccountController {
 
     @ApiOperation(value = "login",notes = "if username not valid, user id = -1; if password is not valid, user id = -2; else is the normal user class")
     @PostMapping("/login")
-    public Result loginForPropertyManagement(@RequestBody UserLoginDTO userLoginDTO){
+    public Result loginForUser(@RequestBody UserLoginDTO userLoginDTO){
         User user = accountService.login(userLoginDTO);
 
         if(user!=null){
@@ -30,6 +31,19 @@ public class AccountController {
             return Result.error();
         }
     }
+
+    @ApiOperation(value = "register",notes = "input 'username','password','nickname','email'. And if registed successfully 'data' equals 1")
+    @PostMapping("/register")
+    public Result registerForUser(@RequestBody UserRegisterDTO userRegisterDTO){
+
+        if(accountService.register(userRegisterDTO)==1){
+            return Result.success("1");
+        }else{
+            return Result.error();
+        }
+    }
+
+
 
 }
 
