@@ -14,13 +14,21 @@
 
     <!-- Insert a question into the questions table -->
     <insert id="insertQuestion" parameterType="com.example.fisherman_server.entity.Question">
-        INSERT INTO questions (question, option_a, option_b, option_c, option_d, answer)
-        VALUES (#{question}, #{optionA}, #{optionB}, #{optionC}, #{optionD}, #{answer});
+        INSERT INTO questions (question, type, option_a, option_b, option_c, option_d, answer)
+        VALUES (#{question}, #{type}, #{optionA}, #{optionB}, #{optionC}, #{optionD}, #{answer});
     </insert>
 
     <!-- Retrieve the content of the nth question -->
     <select id="getNthQuestion" resultMap="QuestionParameterMap">
         SELECT * FROM questions ORDER BY id DESC LIMIT #{n}, 1
     </select>
+
+    <update id="updateUserHighestScoreAndCreateTime">
+        UPDATE sys_user
+        SET highest_score = CASE WHEN #{score} >= highest_score THEN #{score} ELSE highest_score END,
+        create_time = CASE WHEN #{score} >= highest_score THEN CURRENT_TIMESTAMP ELSE create_time END
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>fisherman_server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
     <name>fisherman_server</name>
     <description>fisherman_server</description>
     <properties>
