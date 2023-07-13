@@ -23,4 +23,12 @@
         SELECT * FROM questions ORDER BY id DESC LIMIT #{n}, 1
     </select>
 
+    <update id="updateUserHighestScoreAndCreateTime">
+        UPDATE sys_user
+        SET highest_score = CASE WHEN #{score} >= highest_score THEN #{score} ELSE highest_score END,
+        create_time = CASE WHEN #{score} >= highest_score THEN CURRENT_TIMESTAMP ELSE create_time END
+        WHERE id = #{id}
+    </update>
+
+
 </mapper>

@@ -13,4 +13,6 @@ public class User {
     private String password;
     private String nickname;
     private String email;
+    private String create_time;
+    private String highest_score;
 }

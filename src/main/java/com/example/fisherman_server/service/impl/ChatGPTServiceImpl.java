@@ -1,6 +1,7 @@
 package com.example.fisherman_server.service.impl;
 
 import com.example.fisherman_server.controller.DTO.GPTChatting;
+import com.example.fisherman_server.controller.DTO.SubmitGameSessionDTO;
 import com.example.fisherman_server.dao.QuestionsDao;
 import com.example.fisherman_server.entity.Question;
 import com.example.fisherman_server.service.ChatGPTService;
@@ -100,6 +101,11 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     public List<Question> getNthQuestion(int n){
         return questionsDao.getNthQuestion(n);
 
+    }
+
+    @Override
+    public Integer submitGameSession(int id, int score){
+        return questionsDao.updateUserHighestScoreAndCreateTime(id, score);
     }
 
 
